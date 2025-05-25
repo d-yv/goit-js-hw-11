@@ -1,5 +1,7 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+import axios from 'axios';
+import getImagesByQuery from './js/pixabay-api';
 
 document.querySelector('.search-form').addEventListener('submit', e => {
   e.preventDefault();
@@ -19,4 +21,5 @@ document.querySelector('.search-form').addEventListener('submit', e => {
   e.target.reset();
 
   console.log(searchText); // output form text
+  getImagesByQuery(searchText);
 });
