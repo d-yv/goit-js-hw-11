@@ -1,9 +1,13 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import axios from 'axios';
 import getImagesByQuery from './js/pixabay-api';
+import axios from 'axios';
 
-document.querySelector('.search-form').addEventListener('submit', e => {
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+import createGallery from './js/render-functions';
+
+document.querySelector('.search-form').addEventListener('submit', async e => {
   e.preventDefault();
   let searchText = '';
 
@@ -20,6 +24,10 @@ document.querySelector('.search-form').addEventListener('submit', e => {
   }
   e.target.reset();
 
-  console.log(searchText); // output form text
-  getImagesByQuery(searchText);
+  console.log(searchText);
+
+  const images = await getImagesByQuery(searchText);
+  console.log('main', images);
+
+  createGallery(images);
 });
