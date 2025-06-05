@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export default async function getImagesByQuery(query) {
+export default function getImagesByQuery(query) {
   const link = 'https://pixabay.com/api/';
-  try {
-    const response = await axios.get(link, {
+  return axios
+    .get(link, {
       params: {
         key: '50483673-3addba2370166e44fbbdc4d02',
         q: query,
@@ -11,10 +11,10 @@ export default async function getImagesByQuery(query) {
         orientation: 'horizontal',
         safesearch: true,
       },
+    })
+    .then(response => response.data)
+    .catch(error => {
+      console.error(error);
+      return null;
     });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
 }
