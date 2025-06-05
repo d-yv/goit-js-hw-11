@@ -1,11 +1,10 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-export default function createGallery(images) {
-  console.log('images', images);
+const loader = document.querySelector('.loader');
+const gallery = document.querySelector('.gallery');
 
-  const gallery = document.querySelector('.gallery');
-
+export function createGallery(images) {
   const imagesArr = images.hits
     .map(
       ({
@@ -17,14 +16,33 @@ export default function createGallery(images) {
         comments,
         downloads,
       }) => `<li class="gallery-item">
-    <a class="gallery-link" href=${largeImageURL}>
-      <img
-        class="gallery-image"
-        src=${webformatURL}
-        alt=${tags}
-      />
-    </a>
-  </li>`
+              <a class="gallery-link" href=${largeImageURL}>
+                <img
+                  src=${webformatURL}
+                  alt=${tags}
+                  width="360"
+                  height="200"
+                />
+                <ul class="markup-image">
+                  <ul>
+                    <li class = "markup-image-text">likes</li>
+                    <li class = "markup-image-value">${likes}</li>      
+                  </ul>
+                  <ul>
+                    <li class = "markup-image-text">views</li>
+                    <li class = "markup-image-value">${views}</li>      
+                  </ul>
+                  <ul>
+                    <li class = "markup-image-text">comments</li>
+                    <li class = "markup-image-value">${comments}</li>      
+                  </ul>
+                  <ul>
+                    <li class = "markup-image-text">downloads</li>
+                    <li class = "markup-image-value">${downloads}</li>      
+                  </ul>
+                </ul>
+              </a>
+            </li>`
     )
     .join('');
 
@@ -34,5 +52,17 @@ export default function createGallery(images) {
     captionDelay: 250,
     captionPosition: 'bottom',
     captionsData: 'alt',
-  });
+  }).refresh();
+}
+
+export function clearGallery() {
+  gallery.innerHTML = '';
+}
+
+export function showLoader() {
+  loader.style.display = 'block';
+}
+
+export function hideLoader() {
+  loader.style.display = 'none';
 }

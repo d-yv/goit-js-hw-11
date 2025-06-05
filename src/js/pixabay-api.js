@@ -12,7 +12,6 @@ export default async function getImagesByQuery(query) {
         safesearch: true,
       },
     });
-    console.log('api', response.data);
     return response.data;
   } catch (error) {
     console.error(error);
