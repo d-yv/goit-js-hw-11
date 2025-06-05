@@ -8,7 +8,7 @@ import {
   hideLoader,
 } from './js/render-functions';
 
-document.querySelector('.search-form').addEventListener('submit', async e => {
+document.querySelector('.form').addEventListener('submit', async e => {
   e.preventDefault();
 
   let searchText = '';
