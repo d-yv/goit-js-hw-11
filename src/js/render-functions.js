@@ -4,8 +4,14 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const loader = document.querySelector('.loader');
 const gallery = document.querySelector('.gallery');
 
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionDelay: 250,
+  captionPosition: 'bottom',
+  captionsData: 'alt',
+});
+
 export function createGallery(images) {
-  const imagesArr = images.hits
+  const imagesArr = images
     .map(
       ({
         webformatURL,
@@ -19,40 +25,35 @@ export function createGallery(images) {
               <a class="gallery-link" href=${largeImageURL}>
                 <img
                   src=${webformatURL}
-                  alt=${tags}
+                  alt="${tags}"
                   width="360"
                   height="200"
                 />
-                <ul class="markup-image">
+                <div class="markup-image">
                   <ul>
-                    <li class = "markup-image-text">likes</li>
-                    <li class = "markup-image-value">${likes}</li>      
+                    <li class="markup-image-text">likes</li>
+                    <li class="markup-image-value">${likes}</li>      
                   </ul>
                   <ul>
-                    <li class = "markup-image-text">views</li>
-                    <li class = "markup-image-value">${views}</li>      
+                    <li class="markup-image-text">views</li>
+                    <li class="markup-image-value">${views}</li>      
                   </ul>
                   <ul>
-                    <li class = "markup-image-text">comments</li>
-                    <li class = "markup-image-value">${comments}</li>      
+                    <li class="markup-image-text">comments</li>
+                    <li class="markup-image-value">${comments}</li>      
                   </ul>
                   <ul>
-                    <li class = "markup-image-text">downloads</li>
-                    <li class = "markup-image-value">${downloads}</li>      
+                    <li class="markup-image-text">downloads</li>
+                    <li class="markup-image-value">${downloads}</li>      
                   </ul>
-                </ul>
+                </div>
               </a>
             </li>`
     )
     .join('');
 
   gallery.innerHTML = imagesArr;
-
-  new SimpleLightbox('.gallery a', {
-    captionDelay: 250,
-    captionPosition: 'bottom',
-    captionsData: 'alt',
-  }).refresh();
+  lightbox.refresh();
 }
 
 export function clearGallery() {
