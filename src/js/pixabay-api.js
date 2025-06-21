@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 export default function getImagesByQuery(query) {
-  const link = 'https://pixabay.com/api/';
+  const link = 'https://vercel-api-proxy-six-fawn.vercel.app/api/proxy';
   return axios
     .get(link, {
       params: {
-        key: '50483673-3addba2370166e44fbbdc4d02',
+        source: 'pixabay',
         q: query,
         image_type: 'photo',
         orientation: 'horizontal',
